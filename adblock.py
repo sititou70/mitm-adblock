@@ -80,33 +80,7 @@ def request(flow):
         log("blocked-url: %s" % flow.request.url)
         log("^^^^^^^^^^^^^^^^^^^^ BLOCKED ^^^^^^^^^^^^^^^^^^^^^^^^^^^")
 
-        # resp = HTTPResponse((1,1), 404, "OK",
-        #     ODictCaseless([["Content-Type", "text/html"]]),
-        #     "A terrible ad has been removed!")
-
-        # HTTPResponse(http_version, status_code, reason, headers, content, timestamp_start=None, timestamp_end=None)
-
-        # resp = HTTPResponse(
-        #     (1,1),
-        #     200,
-        #     "OK",
-        #     ODictCaseless(
-        #         [
-        #             ["Content-Type", "text/html"]
-        #         ]
-        #     ),
-        #     "BLOCKED."
-        # )
-
-        resp = HTTPResponse(
-            (1,1),
-            200,
-            "OK",
-            Headers(content_type="text/html"),
-            "BLOCKED."
-        )
-
-        flow.reply(resp)
+        flow.kill()
     else:
         log("url: %s" % flow.request.url)
 
